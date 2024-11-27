@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0d1b2a; /* Dark blue background */
+    color: #fff; /* White text */
+}
+
+.header {
+    padding: 20px;
+    background-color: #1e3a5f;
+    text-align: center;
+}
+
+.header h1 {
+    color: #fff;
+}
+
+#user-welcome {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #c5d8e3;
+}
+
+.stock-market {
+    padding: 30px;
+    text-align: center;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #c5d8e3;
+    text-align: center;
+}
+
+th {
+    background-color: #112d48;
+    color: #fff;
+}
+
+td {
+    background-color: #1e3a5f;
+}
+
+button {
+    padding: 5px 10px;
+    background-color: #1e3a5f;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+button:hover {
+    background-color: #2c3e50;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #1e3a5f;
+    color: white;
+    border: none;
+}
+
+footer button:hover {
+    background-color: #2c3e50;
+}

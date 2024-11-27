@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCN - Stock Market</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Liberty City National Exchange</h1>
+        <div id="user-welcome"></div>
+    </div>
+
+    <div class="stock-market">
+        <h2>Stock Listings</h2>
+        <table id="stock-table">
+            <thead>
+                <tr>
+                    <th>Stock</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                    <th>Buy</th>
+                    <th>Sell</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Stock rows will be populated here by JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        // Stock data simulation
+        let stocks = [
+            { name: 'TechCorp', price: 100, symbol: 'TC' },
+            { name: 'RetailCo', price: 50, symbol: 'RC' },
+            { name: 'EnergyInc', price: 75, symbol: 'EI' }
+        ];
+
+        // Random stock price fluctuation
+        function updateStockPrices() {
+            stocks.forEach(stock => {
+                const change = (Math.random() - 0.5) * 10; // Random change up or down
+                stock.price = Math.max(1, stock.price + change); // Ensure price doesn't go below 1
+            });
+            renderStockTable();
+        }
+
+        // Render stock table
+        function renderStockTable() {
+            const tableBody = document.getElementById('stock-table').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Clear the table before re-rendering
+            stocks.forEach(stock => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${stock.name} (${stock.symbol})</td>
+                    <td>$${stock.price.toFixed(2)}</td>
+                    <td>${(Math.random() > 0.5 ? '+' : '-')}${(Math.random() * 2).toFixed(2)}%</td>
+                    <td><button onclick="buyStock('${stock.symbol}')">Buy</button></td>
+                    <td><button onclick="sellStock('${stock.symbol}')">Sell</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Buy stock
+        function buyStock(symbol) {
+            const user = localStorage.getItem('username');
+            alert(`${user}, you bought stock in ${symbol}`);
+            // Simulate stock purchase logic here (e.g., update balance, stocks owned)
+        }
+
+        // Sell stock
+        function sellStock(symbol) {
+            const user = localStorage.getItem('username');
+            alert(`${user}, you sold stock in ${symbol}`);
+            // Simulate stock selling logic here
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('username');
+            window.location.href = 'index.html'; // Redirect back to login page
+        }
+
+        // Set up user greeting
+        window.onload = function() {
+            const user = localStorage.getItem('username');
+            if (user) {
+                document.getElementById('user-welcome').innerText = `Welcome, ${user}`;
+                setInterval(updateStockPrices, 5000); // Update stock prices every 5 seconds
+            } else {
+                window.location.href = 'index.html'; // Redirect to login page if not logged in
+            }
+        };
+
+        // Initialize the stock page
+        renderStockTable();
+    </script>
+</body>
+</html>
